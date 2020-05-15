@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Informacion del usuario</title>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous"></script>
+
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+
+
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+<script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="static/css/user-form.css"
+	th:href="@{/css/user-form.css}">
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(document).on("keyup change", "#dui", function(evt) {
+			var charCode = (evt.which) ? evt.which : evt.keyCode;
+			$("#dui").val(duiFormat($("#dui").val()));
+		});
+
+		function duiFormat(input) {
+			input = input.replace(/\D/g, "");
+			input = input.substring(0, 10);
+			var size = input.length;
+			if (size == 0) {
+				input = input;
+			} else if (size <= 8) {
+				input = input;
+			} else if (size > 8) {
+				input = input.substring(0, 8) + "-" + input.substring(8, 9);
+			}
+			return input;
+		}
+	});
+</script>
+</head>
+<body>
+	<div class="container">
+		<div class="mx-auto col-sm-8 main-section">
+			<div class="card">
+				<div class="card-header">
+					<center>
+						<h4>Registro de usuario</h4>
+					</center>
+				</div>
+				<div class="card-body">
+					<div th:include="user-form/user-form.html" th:remove="tag"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
